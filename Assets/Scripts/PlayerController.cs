@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(CharacterController))]
+[RequireComponent(typeof(BomberMan))]
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private Vector2 inputMovement;
@@ -11,11 +12,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private CharacterController characterController;
     [SerializeField] private float gravity = -9.81f;
 
-    [SerializeField] private float cooldownPlantBomb = 4f;
-
-    [SerializeField] private bool canPlant;
-
-    public GameObject _prefabBomb;
 
     public float playerSpeed = 3.5f;
 
@@ -23,19 +19,20 @@ public class PlayerController : MonoBehaviour
 
     [Header("Bomb PowerUp")]
 
-    [SerializeField] private int bombRange = 1;
+    [SerializeField] private BomberMan bomberManInfo;
 
     private void Awake()
     {
+        bomberManInfo = GetComponent<BomberMan>();
         characterController = GetComponent<CharacterController>();
         inputMovement = Vector3.zero;
-        canPlant = true;
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        //HandleMovingInput();
+
         HandleGravity();
         HandleRotation();
         Move();
@@ -44,14 +41,11 @@ public class PlayerController : MonoBehaviour
 
     private void HandleGravity()
     {
-        
-
         direction.y = gravity * Time.deltaTime;
-       
-        
     }
     public void HandleMovingInput(InputAction.CallbackContext context)
     {
+        Debug.Log("HandleMovingInput");
         inputMovement = context.ReadValue<Vector2>();
         inputMovement.Normalize();
         direction = new Vector3(inputMovement.x, 0.0f, inputMovement.y);
@@ -59,7 +53,8 @@ public class PlayerController : MonoBehaviour
 
     private void Move()
     {
-        characterController.Move(direction * playerSpeed * Time.deltaTime);  
+        Debug.Log("Move");
+        characterController.Move(direction * playerSpeed * bomberManInfo.speedBoost * Time.deltaTime);  
     }
     
     private void HandleRotation()
@@ -68,29 +63,5 @@ public class PlayerController : MonoBehaviour
     }
 
 
-    public void PlantBomb(InputAction.CallbackContext context)
-    {
-        Debug.Log("Plant the bomb ! :" + canPlant);
-
-        if(canPlant)
-        {
-            canPlant = false;
-
-            Vector3 pos = new Vector3(Mathf.Round(gameObject.transform.position.x),0, Mathf.Round(gameObject.transform.position.z));
-
-            var Bomb = Instantiate(_prefabBomb,pos, Quaternion.identity);
-            Bomb.GetComponent<BombManager>().explodeRange = bombRange;
-            StartCoroutine(StartCooldownBomb(cooldownPlantBomb));
-        }
-       
-    }
-
-
-    IEnumerator StartCooldownBomb(float duration)
-    {
-        yield return new WaitForSeconds(duration);
-        canPlant = true;
-
-    }
 
 }

@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5262601066251850402}
   - component: {fileID: 4161883335780963031}
   - component: {fileID: 5219653734999402449}
+  - component: {fileID: 1592999866510674426}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -103,9 +104,8 @@ MonoBehaviour:
   characterController: {fileID: 0}
   gravity: -9.81
   cooldownPlantBomb: 4
-  canPlant: 0
-  _prefabBomb: {fileID: 2546704745097460815, guid: 841a4e541b02d41439bd7ac372800567, type: 3}
   playerSpeed: 3.5
+  bomberManInfo: {fileID: 0}
 --- !u!114 &5219653734999402449
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -149,8 +149,8 @@ MonoBehaviour:
     m_ActionName: Gameplay/Move[/Keyboard/z,/Keyboard/s,/Keyboard/q,/Keyboard/d]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4161883335780963031}
-        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+      - m_Target: {fileID: 1592999866510674426}
+        m_TargetAssemblyTypeName: BomberMan, Assembly-CSharp
         m_MethodName: PlantBomb
         m_Mode: 0
         m_Arguments:
@@ -163,11 +163,68 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 1e182a66-2ee1-43d4-bbaf-00250972b5b3
     m_ActionName: Gameplay/PlantBomb[/Keyboard/space]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1592999866510674426}
+        m_TargetAssemblyTypeName: BomberMan, Assembly-CSharp
+        m_MethodName: ThrowingBomb
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: c403d95c-6c71-4e08-8c4e-d3e07d6fdd9c
+    m_ActionName: Gameplay/ThrowBomb[/Keyboard/e]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1592999866510674426}
+        m_TargetAssemblyTypeName: BomberMan, Assembly-CSharp
+        m_MethodName: PunchBomb
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 45901bbf-cc09-4fe0-a5d9-07f3e2efbf80
+    m_ActionName: Gameplay/PunchBomb[/Keyboard/c]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Gameplay
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &1592999866510674426
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1407226024354948568}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da666733822a4a34c8f60ce237933290, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _prefabBomb: {fileID: 0}
+  cooldownPlantBomb: 4
+  BombPower: 1
+  numberOfBombMax: 1
+  numberBombLeft: 1
+  speedBoost: 0
+  rangeThrow: 0
+  canPlant: 1
+  canThrow: 0
+  canPush: 0
+  canKick: 0
+  hasShield: 0
+  bombInHand: {fileID: 0}
 --- !u!1 &3217981773582059987
 GameObject:
   m_ObjectHideFlags: 0

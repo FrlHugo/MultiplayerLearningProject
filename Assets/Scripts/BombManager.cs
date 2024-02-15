@@ -180,7 +180,7 @@ public class BombManager : MonoBehaviour
 
     }
 
-
+    /*
     void OnDrawGizmos()
     {
         if(canDrawGizmos)
@@ -264,4 +264,5 @@ public class BombManager : MonoBehaviour
         }
 
     }
+    */
 }
