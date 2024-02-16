@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,6 +13,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private CharacterController characterController;
     [SerializeField] private float gravity = -9.81f;
 
+    private float currentVelocity;
+    [SerializeField] private float smoothtime = 0.05f;
 
     public float playerSpeed = 3.5f;
 
@@ -45,7 +48,7 @@ public class PlayerController : MonoBehaviour
     }
     public void HandleMovingInput(InputAction.CallbackContext context)
     {
-        Debug.Log("HandleMovingInput");
+
         inputMovement = context.ReadValue<Vector2>();
         inputMovement.Normalize();
         direction = new Vector3(inputMovement.x, 0.0f, inputMovement.y);
@@ -53,13 +56,18 @@ public class PlayerController : MonoBehaviour
 
     private void Move()
     {
-        Debug.Log("Move");
         characterController.Move(direction * playerSpeed * bomberManInfo.speedBoost * Time.deltaTime);  
     }
     
     private void HandleRotation()
     {
-      
+        if(inputMovement.sqrMagnitude > 0.0f)
+        {
+            var targetAngle = MathF.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
+            //var angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref currentVelocity, smoothtime); // smooth the rotation
+            transform.rotation = Quaternion.Euler(0f, targetAngle, 0f);
+        }
+
     }
 
 

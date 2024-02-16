@@ -32,7 +32,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3525629540146535924}
-  - {fileID: 6496552024931436581}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &8554093382615499649
@@ -72,6 +71,9 @@ MonoBehaviour:
   bombMesh: {fileID: 8837656736994697164}
   prefabExplosion: {fileID: 2445688337057995664, guid: c301be5e562930b4fba1d0c3b9c632a0, type: 3}
   explodeRange: 3
+  bombScale: {x: 1.5, y: 1.5, z: 1.5}
+  goalScale: {x: 3.5, y: 3.5, z: 3.5}
+  scaleAnimationSpeed: 0.3
 --- !u!1 &8837656736994697164
 GameObject:
   m_ObjectHideFlags: 0
@@ -102,7 +104,8 @@ Transform:
   m_LocalPosition: {x: 0, y: -0.5, z: 0}
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 1
-  m_Children: []
+  m_Children:
+  - {fileID: 6496552024931436581}
   m_Father: {fileID: 1574357954592551307}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &5274645036931398947
@@ -133,7 +136,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a563c4f0607b34794a3d5a88f6759ac9, type: 2}
+  - {fileID: 2100000, guid: b2c8bfcd60275c140a0aeb91ec9f6f47, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -161,19 +164,19 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 1574357954592551307}
+    m_TransformParent: {fileID: 3525629540146535924}
     m_Modifications:
     - target: {fileID: 56852242586695114, guid: 4d7e19c9fcb52be4bb9a8ba855ffe12d, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1
+      value: 0.33333334
       objectReference: {fileID: 0}
     - target: {fileID: 56852242586695114, guid: 4d7e19c9fcb52be4bb9a8ba855ffe12d, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1
+      value: 0.33333334
       objectReference: {fileID: 0}
     - target: {fileID: 56852242586695114, guid: 4d7e19c9fcb52be4bb9a8ba855ffe12d, type: 3}
       propertyPath: m_LocalScale.z
-      value: 1
+      value: 0.33333334
       objectReference: {fileID: 0}
     - target: {fileID: 56852242586695114, guid: 4d7e19c9fcb52be4bb9a8ba855ffe12d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -181,7 +184,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 56852242586695114, guid: 4d7e19c9fcb52be4bb9a8ba855ffe12d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.655
+      value: 0.385
       objectReference: {fileID: 0}
     - target: {fileID: 56852242586695114, guid: 4d7e19c9fcb52be4bb9a8ba855ffe12d, type: 3}
       propertyPath: m_LocalPosition.z
@@ -233,7 +236,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 56852242586695117, guid: 4d7e19c9fcb52be4bb9a8ba855ffe12d, type: 3}
       propertyPath: InitialModule.maxNumParticles
-      value: 300
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 56852242586695117, guid: 4d7e19c9fcb52be4bb9a8ba855ffe12d, type: 3}
       propertyPath: InitialModule.startSize.scalar

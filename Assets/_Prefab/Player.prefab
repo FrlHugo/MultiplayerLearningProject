@@ -55,7 +55,7 @@ CapsuleCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.3
   m_Height: 1.25
@@ -103,9 +103,9 @@ MonoBehaviour:
   direction: {x: 0, y: 0, z: 0}
   characterController: {fileID: 0}
   gravity: -9.81
-  cooldownPlantBomb: 4
+  smoothtime: 0.05
   playerSpeed: 3.5
-  bomberManInfo: {fileID: 0}
+  bomberManInfo: {fileID: 1592999866510674426}
 --- !u!114 &5219653734999402449
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -212,19 +212,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da666733822a4a34c8f60ce237933290, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _prefabBomb: {fileID: 0}
-  cooldownPlantBomb: 4
-  BombPower: 1
+  _prefabBomb: {fileID: 2546704745097460815, guid: 841a4e541b02d41439bd7ac372800567, type: 3}
+  cooldownPlantBomb: 3
+  bombPower: 1
   numberOfBombMax: 1
   numberBombLeft: 1
-  speedBoost: 0
+  speedBoost: 1
   rangeThrow: 0
-  canPlant: 1
   canThrow: 0
   canPush: 0
   canKick: 0
   hasShield: 0
   bombInHand: {fileID: 0}
+  throwTestGO: {fileID: 8919189979599460774, guid: 2796c1f2517c69a47a1479a0804caf28, type: 3}
 --- !u!1 &3217981773582059987
 GameObject:
   m_ObjectHideFlags: 0
@@ -286,7 +286,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 671a07a59a8b65d469fddcaf483f162b, type: 2}
+  - {fileID: 2100000, guid: b7528d5fd1a11f548b436757d44bad01, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -369,7 +369,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9b0e331104f90bc48bfe6945ab23f6d0, type: 2}
+  - {fileID: 2100000, guid: f7261cdeea2a5d14aa91fb8ca306cf74, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

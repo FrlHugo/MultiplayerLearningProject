@@ -38,7 +38,12 @@ public class BombManager : MonoBehaviour
 
     private bool canDrawGizmos = false;
 
+    [SerializeField] private Vector3 bombScale = new Vector3(1.5f,1.5f,1.5f);
+    [SerializeField] private Vector3 goalScale = new Vector3(3.5f, 3.5f, 3.5f);
 
+    [SerializeField] private float scaleAnimationSpeed = 0.3f;
+
+    private float timePassed;
     private void Awake()
     {
         boxCollider = GetComponent<BoxCollider>();
@@ -49,16 +54,21 @@ public class BombManager : MonoBehaviour
     private void Start()
     {
         StartCoroutine(CountDownExplosion());
+        bombMesh.transform.localScale = bombScale;
+
     }
     // Update is called once per frame
     void Update()
     {
-        
+        timePassed += Time.deltaTime;
+
+        bombMesh.transform.localScale = Vector3.Slerp(goalScale, bombScale, Mathf.PingPong(timePassed, scaleAnimationSpeed));
     }
     private void OnTriggerExit(Collider other)
     {
         if (other.gameObject.tag == "Player")
         {
+
             boxCollider.isTrigger = false;
         }
     }
@@ -109,7 +119,7 @@ public class BombManager : MonoBehaviour
             hitForwardDistance =  Mathf.Round(hitForward.collider.gameObject.transform.position.z) - Mathf.Round(transform.position.z) -1;
             if (hitForward.collider.gameObject.tag == "WoodBlock")
             {
-                Debug.Log("WoodBlock Forward Cast");
+        
                 hitForwardDistance += 1;
             }
         }
