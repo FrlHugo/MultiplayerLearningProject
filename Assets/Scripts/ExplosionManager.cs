@@ -1,12 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using Unity.VisualScripting;
 using UnityEngine;
 
 [RequireComponent(typeof(ParticleSystem))]
-public class ExplosionManager : MonoBehaviour
+public class ExplosionManager : NetworkBehaviour
 {
     private ParticleSystem particleSystemExplosion;
+
+    private GameObject gameObjectToDestroy;
     
     private void Awake()
     {
@@ -37,8 +40,10 @@ public class ExplosionManager : MonoBehaviour
         }
         if(other.gameObject.tag == "WoodBlock")
         {
-    
-            other.gameObject.GetComponent<WoodBlock>().BlockDestroyed();
+            Debug.Log("it is a woodblock");
+            //other.gameObject.GetComponent<WoodBlock>().BlockDestroyed();
+            gameObjectToDestroy = other.gameObject;
+            OnCollisionDestroyWoodBlock();
         }
         if(other.gameObject.tag == "PowerUp")
         {
@@ -49,6 +54,19 @@ public class ExplosionManager : MonoBehaviour
         }
 
     }
+
+   
+    public void OnCollisionDestroyWoodBlock()
+    {
+        
+        Debug.Log("OnCollisionDestroyWoodBlockServerRpc");
+
+        GameManager.instance.DestroyWoodBlockServerRpc(GameManager.instance.listWoodGOBlocks.IndexOf(gameObjectToDestroy));
+        gameObjectToDestroy = null;
+    }
+
+
+
 
 
 

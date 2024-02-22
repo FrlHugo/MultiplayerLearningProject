@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
-using static UnityEditor.PlayerSettings;
+
 
 [RequireComponent(typeof(BoxCollider))]
-public class BombManager : MonoBehaviour
+public class BombManager : NetworkBehaviour
 {
     private BoxCollider boxCollider;
     public float delayExplosion = 3f;
@@ -36,7 +37,7 @@ public class BombManager : MonoBehaviour
     private bool forwardHit;
     private bool backHit;
 
-    private bool canDrawGizmos = false;
+   // private bool canDrawGizmos = false;
 
     [SerializeField] private Vector3 bombScale = new Vector3(1.5f,1.5f,1.5f);
     [SerializeField] private Vector3 goalScale = new Vector3(3.5f, 3.5f, 3.5f);
@@ -76,7 +77,7 @@ public class BombManager : MonoBehaviour
     IEnumerator CountDownExplosion()
     {
         yield return new WaitForSeconds(delayExplosion);
-        canDrawGizmos = true;
+        //canDrawGizmos = true;
         Explode();//
 
     }
@@ -142,7 +143,7 @@ public class BombManager : MonoBehaviour
             hitBackDistance = explodeRange;
         }
 
-        Debug.Log("HitBack " + hitBackDistance);
+
 
 
     }

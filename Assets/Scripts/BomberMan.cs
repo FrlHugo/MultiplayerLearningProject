@@ -1,12 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class BomberMan : MonoBehaviour
+public class BomberMan : NetworkBehaviour
 {
-
     public GameObject _prefabBomb;
     [SerializeField] private float cooldownPlantBomb = 3f;
 
@@ -24,7 +24,9 @@ public class BomberMan : MonoBehaviour
 
     public GameObject bombInHand;
 
-    public GameObject throwTestGO;
+    public List<GameObject> bombList = new List<GameObject>();
+
+    [SerializeField] private BombListSO bombListSo;
 
     // Start is called before the first frame update
     void Start()
@@ -37,31 +39,38 @@ public class BomberMan : MonoBehaviour
     {
         
     }
-
+   
     public void PlantBomb(InputAction.CallbackContext context)
     {
+        if(!IsOwner)
+        { return; }
+        SpawnBombObjectServerRPC() ;
+    }
 
-        if (numberBombLeft >0)
+
+
+    [ServerRpc(RequireOwnership = false)]
+    private void SpawnBombObjectServerRPC()
+    { 
+        if (numberBombLeft > 0)
         {
-    
-
             Vector3 pos = new Vector3(Mathf.Round(gameObject.transform.position.x), 0, Mathf.Round(gameObject.transform.position.z));
 
             var Bomb = Instantiate(_prefabBomb, pos, Quaternion.identity);
 
+            NetworkObject bombNetwork = Bomb.GetComponent<NetworkObject>();
+            bombNetwork.Spawn(true);
             //setup bomb info
             Bomb.GetComponent<BombManager>().explodeRange = bombPower;
             numberBombLeft -= 1;
-            
-           
         }
 
-        if(numberBombLeft <=0)
+        if (numberBombLeft <= 0)
         {
             StartCoroutine(StartCooldownBomb(cooldownPlantBomb));
         }
-
     }
+    
 
     //function than will allow the player to first catch a bomb then throw it
     public void ThrowingBomb(InputAction.CallbackContext context)

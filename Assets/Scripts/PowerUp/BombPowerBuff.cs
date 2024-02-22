@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "PowerUp/BombPowerBuff")]
-public class BombPowerBuff : PowerUpEffect
+public class BombPowerBuff : PowerUpEffectSO
 {
     public int amount;
 

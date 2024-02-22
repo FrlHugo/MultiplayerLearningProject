@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7329605094525906551}
   - component: {fileID: 8104868625547360725}
   - component: {fileID: 792412741029781390}
+  - component: {fileID: 2640284871378215597}
   m_Layer: 11
   m_Name: PowerUp
   m_TagString: Untagged
@@ -71,6 +72,22 @@ MonoBehaviour:
   powerUpEffect: {fileID: 11400000, guid: 85ce2fd798487fa44b76515548e28854, type: 2}
   canBeDestroyed: 0
   invincibleTimeAfterSpawn: 0.4
+--- !u!114 &2640284871378215597
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2193728583834380247}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 951099334
+  AlwaysReplicateAsRoot: 0
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
 --- !u!1 &3058607536110482451
 GameObject:
   m_ObjectHideFlags: 0
